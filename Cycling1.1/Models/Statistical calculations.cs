@@ -10,7 +10,7 @@ namespace Cycling1._1
     {
         public static Dictionary<string, raceresults> StageRaceDictionary = new Dictionary<string, raceresults>();
 
-        
+        //This matches the race results to a property of the riders called RaceResult. This saves time in the future and stops having to do a search algorithm everytime you want to search for a result. 
         public static void resultsmatcher()
         {
             foreach (var stages in Singleton_Class.ListofStageRaces)
