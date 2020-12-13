@@ -529,6 +529,13 @@ namespace Cycling1._1
 
         }
 
+        public float GCRatingCalculator(List<raceresults> iResultsOfRider, List<RiderGCResults> iRiderGCResults)
+        {
+
+            float GCRating = 0;
+            return GCRating;
+        }
+
       
     }
 
@@ -560,6 +567,14 @@ namespace Cycling1._1
             set { numberofstages = value; }
         }
 
+        private List<GCGapsForRiderOnMountainStage> _TimeLossPerStage;
+
+        public List<GCGapsForRiderOnMountainStage> TimeLossPerStage
+        {
+            get { return _TimeLossPerStage; }
+            set { _TimeLossPerStage = value; }
+        }
+
         public RiderGCResults(string nNameofGCRace, string nNameofTeam, string nPosition, date nDate, int nNumberofStages)
         {
             this.NameofGCRace = nNameofGCRace;
@@ -575,6 +590,34 @@ namespace Cycling1._1
         }
 
     }
+
+    public class GCGapsForRiderOnMountainStage
+    {
+        private string _StageNumber;
+        
+        public string StageNumber
+        {
+          get { return _StageNumber; }
+          set { _StageNumber = value; }
+        }
+
+        private float _ClimbingRating;
+
+        public float ClimbingRating
+        {
+            get { return _ClimbingRating; }
+            set { _ClimbingRating = value; }
+        }
+
+        private int _GapOnStage;
+
+        public int GapOnStage
+        {
+            get { return _GapOnStage; }
+            set { _GapOnStage = value; }
+        }
+    }
+
 
 
     public class AdvancedMetrics
