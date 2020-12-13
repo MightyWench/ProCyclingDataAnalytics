@@ -529,13 +529,6 @@ namespace Cycling1._1
 
         }
 
-        public float GCRatingCalculator(List<raceresults> iResultsOfRider, List<RiderGCResults> iRiderGCResults)
-        {
-
-            float GCRating = 0;
-            return GCRating;
-        }
-
       
     }
 
@@ -589,16 +582,51 @@ namespace Cycling1._1
 
         }
 
+        public float GCRatingCalculator(List<raceresults> iResultsOfRider, List<RiderGCResults> iRiderGCResults)
+        {
+
+            float GCRating = 0;
+            return GCRating;
+        }
+
+        public void GCResultsGapsMatcher(List<RiderGCResults> iGCResults, Riders iRider)
+        {
+            List<Stageraces> AllStageRaces = Singleton_Class.ListofPCTStageRaces;
+            AllStageRaces.AddRange(Singleton_Class.ListofStageRaces);
+
+            foreach(var stagerace in AllStageRaces)
+            {
+                List<GCGapsForRiderOnMountainStage> GapsOfRidersInRace = new List<GCGapsForRiderOnMountainStage>();
+                foreach(var result in iGCResults)
+                {
+                    if (result.NameofGCRace.Contains(stagerace.Racename) && result.DateofGC.Year == stagerace.Stageresults[0].Dates.Year)
+                    {
+                        for(int x =0; x < stagerace.GeneralClassificationBreakdown.Count; x++)
+                        {
+                            if(stagerace.GeneralClassificationBreakdown[x].NameofRider.Contains(iRider.Fullname))
+                            {
+                                foreach(int gap in stagerace.GeneralClassificationBreakdown[x].ListOfGCGapsPerStage)
+                                {
+                                    GCGapsForRiderOnMountainStage GapOnstage = new GCGapsForRiderOnMountainStage();
+                                    GapOnstage.GapOnStage = gap;
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
     }
 
     public class GCGapsForRiderOnMountainStage
     {
         private string _StageNumber;
-        
+
         public string StageNumber
         {
-          get { return _StageNumber; }
-          set { _StageNumber = value; }
+            get { return _StageNumber; }
+            set { _StageNumber = value; }
         }
 
         private float _ClimbingRating;
@@ -615,6 +643,11 @@ namespace Cycling1._1
         {
             get { return _GapOnStage; }
             set { _GapOnStage = value; }
+        }
+
+        public GCGapsForRiderOnMountainStage()
+        {
+
         }
     }
 
