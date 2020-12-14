@@ -12,6 +12,8 @@ using System.Xml.Serialization;
 namespace Cycling1._1
 {
     class Races_Downloader
+
+        //This class downloads WT level One Day Races and Stage Races from the PCS Data Stores 
     {
         public static async void WTOneDayRacesdownloader()
         {
