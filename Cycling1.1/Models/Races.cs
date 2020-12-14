@@ -12,6 +12,10 @@ namespace Cycling1._1
 {
 
     [Serializable]
+
+    //Properties for each individual Race. 
+    //Contains properties that are other classes which are defined underneath
+    //Empty Constructor for Serialization into XML. 
     public class Races
     {
         private string racename; 
@@ -129,6 +133,9 @@ namespace Cycling1._1
 
     [Serializable]
 
+
+    //Stages are races that are part of a Stage Race. They will have the same features as a race. 
+    //TTT's are seperated as TTT's will never exist outside of a Stage Race outside of the world championships. 
     public class stages: Races
     {
         private List<TTTformat> tttresults;
@@ -173,6 +180,8 @@ namespace Cycling1._1
 
     [Serializable]
 
+    //TTTs make up TTT riders. Technically this is probably best in the Rider class 
+    //However for easy access to the root of TTTriders (It is never used on its own) it is in Race Class page. 
     public class TTTriders
     {
         private string ridername; 
@@ -276,7 +285,8 @@ namespace Cycling1._1
     }
         
 
-
+    //RaceResults are very similar to races but acts as a property within a Rider so it is seperately defined. 
+    //Initially wanted to inherit from Races but too many differences. 
     [Serializable]
     public class raceresults
     {
@@ -330,6 +340,7 @@ namespace Cycling1._1
 
     }
 
+    //customizable date class so I do not have to use the very format specific built in C# library date function. 
     [Serializable]
     public class date
     {
@@ -545,6 +556,8 @@ namespace Cycling1._1
             return TotalTime;
         }
 
+
+        //This method calculates the gaps in each GC stage and assigns it as a property to each stage race 
         public void GCRiderCounter(List<Stageraces> StageRacesList)
         {
             int AverageStageDifficulty;

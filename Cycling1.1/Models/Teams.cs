@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Cycling1._1
 {
+
+    //All the properties of the Team here. 
+    //constructor only has three inputs as properties are input via algorithms later 
     [Serializable]
     public class Teamdetails 
     {
