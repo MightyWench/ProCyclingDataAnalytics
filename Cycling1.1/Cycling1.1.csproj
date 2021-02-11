@@ -74,6 +74,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Models\ContiRaceDownloader.cs" />
     <Compile Include="Models\PCTDownloader.cs" />
     <Compile Include="Models\Statistical calculations.cs" />
     <Compile Include="Models\Races Downloader.cs" />

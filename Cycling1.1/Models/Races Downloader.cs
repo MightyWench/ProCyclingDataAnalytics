@@ -157,6 +157,7 @@ namespace Cycling1._1
                         racedate.Year = year;
 
 
+                        string test = "basic results";
 
                         var parsedWTOneDayRaces = parsedWTOneDayinDocument.DocumentNode.Descendants("table")
                             .Where(node => node.GetAttributeValue("class", "")
