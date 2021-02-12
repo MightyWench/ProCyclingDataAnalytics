@@ -94,6 +94,18 @@ namespace Cycling1._1
 
             return ListDocument;
         }
+
+        static float RaceLengthNormalized(float racelength, float maxlength, float minlength)
+        {
+            float NormalizedLength = ((racelength - minlength) / (maxlength - minlength));
+            return NormalizedLength;
+        }
+
+        static float RaceDifficultyNormalized(float racedifficulty, float maxdifficulty, float mindifficulty)
+        {
+            float NormalizedDifficulty = ((racedifficulty - mindifficulty) / (maxdifficulty - mindifficulty));
+            return NormalizedDifficulty;
+        }
         
         
         public static async void ContiOneDayRaceDownloader()
@@ -285,11 +297,61 @@ namespace Cycling1._1
                 }
                 Console.WriteLine("Test");
                 Console.ReadLine();
-           
+
+                float MaxLength = Singleton_Class.ListofCTOneDayRaces[0].Racelength;
+                float MinLength = Singleton_Class.ListofCTOneDayRaces[0].Racelength;
+
+                for (int maxminchecker = 0; maxminchecker < Singleton_Class.ListofCTOneDayRaces.Count(); maxminchecker++)
+                {
+                    if (Singleton_Class.ListofCTOneDayRaces[maxminchecker].Racelength > MaxLength)
+                    {
+                        MaxLength = Singleton_Class.ListofCTOneDayRaces[maxminchecker].Racelength;
+                    }
+                    if (Singleton_Class.ListofCTOneDayRaces[maxminchecker].Racelength < MinLength)
+                    {
+                        MinLength = Singleton_Class.ListofCTOneDayRaces[maxminchecker].Racelength;
+                    }
+                }
+
+                float MaxDifficulty = Singleton_Class.ListofCTOneDayRaces[0].Racedifficulty;
+                float MinDifficulty = Singleton_Class.ListofCTOneDayRaces[0].Racedifficulty;
+
+                for (int difficultychecker = 0; difficultychecker < Singleton_Class.ListofCTOneDayRaces.Count(); difficultychecker++)
+                {
+                    if (Singleton_Class.ListofCTOneDayRaces[difficultychecker].Racedifficulty > MaxDifficulty)
+                    {
+                        MaxDifficulty = Singleton_Class.ListofCTOneDayRaces[difficultychecker].Racedifficulty;
+                    }
+                    if (Singleton_Class.ListofCTOneDayRaces[difficultychecker].Racedifficulty < MinDifficulty)
+                    {
+                        MinDifficulty = Singleton_Class.ListofCTOneDayRaces[difficultychecker].Racedifficulty;
+                    }
+                }
+
+                foreach (var race in Singleton_Class.ListofCTOneDayRaces)
+                {
+                    float RaceLengthDifficulty = race.Racelength;
+                    race.Lengthdifficulty = RaceLengthNormalized(RaceLengthDifficulty, MaxLength, MinLength);
+
+                    float NormalizedClimbDifficulty = race.Racedifficulty;
+                    race.Climbdifficultynormalized = RaceDifficultyNormalized(NormalizedClimbDifficulty, MaxDifficulty, MinDifficulty);
+                }
+
                 using (TextWriter CTOneDayTextWriter = new StreamWriter(@"C:\Users\Wenqing Huang\c#\CTOneDayRaces.xml"))
                 {
                     XmlSerializer CTOneDaySerializer = new XmlSerializer(typeof(List<Races>));
+                    CTOneDaySerializer.Serialize(CTOneDayTextWriter, Singleton_Class.ListofCTOneDayRaces);
+                }
+                filechecker = true;
+            }
 
+            if (filechecker == true)
+            {
+                XmlSerializer CTOneDayLoader = new XmlSerializer(typeof(List<Races>));
+
+                using (FileStream CTLoader = File.OpenRead(@"C:\Users\Wenqing Huang\c#\CTOneDayRaces.xml"))
+                {
+                    Singleton_Class.ListofCTOneDayRaces = (List<Races>)CTOneDayLoader.Deserialize(CTLoader);
                 }
             }
             DictionaryResultsMatcher.resultsmatcher();
