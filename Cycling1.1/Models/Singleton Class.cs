@@ -14,5 +14,6 @@ namespace Cycling1._1
         public static List<Stageraces> ListofStageRaces = new List<Stageraces>();
         public static List<Races> ListofPCTOneDayRaces = new List<Races>();
         public static List<Stageraces> ListofPCTStageRaces = new List<Stageraces>();
+        public static List<Races> ListofCTOneDayRaces = new List<Races>();
     }
 }

@@ -919,8 +919,8 @@ namespace Cycling1._1
                     Singleton_Class.ListofPCTStageRaces = (List<Stageraces>)PCTStageRaceLoader.Deserialize(FileStreamer);
                 }
             }
-            ContiRaceDownloader.ContiOneDayRaceDownloader();
-            DictionaryResultsMatcher.resultsmatcher();
+            await Task.Run(() => ContiRaceDownloader.ContiOneDayRaceDownloader());
+           
         }
     }
 }
